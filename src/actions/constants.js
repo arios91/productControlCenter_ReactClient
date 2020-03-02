@@ -1,3 +1,4 @@
+export const API_URL = 'http://localhost:5000';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';
 export const REGISTER_SUCCESS = 'REGISTER_SUCCESS';
@@ -23,5 +24,9 @@ export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT'; 
 export const REMOVE_COMMENT = 'REMOVE_COMMENT'; 
 
-
 export const GET_ORDERS = 'GET_ORDERS';
+export const GET_USERS = 'GET_USERS';
+export const GET_EMPLOYEES = 'GET_EMPLOYEES';
+export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
+export const REMOVE_EMPLOYEE = 'REMOVE_EMPLOYEE';
+export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
