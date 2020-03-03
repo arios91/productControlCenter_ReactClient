@@ -33,6 +33,7 @@ const App = () => {
             <PrivateRoute exact path="/register" component={Register}/>
             <PrivateRoute exact path="/dashboard" component={Dashboard}/>
             <PrivateRoute exact path="/employees" component={Employees}/>
+            <PrivateRoute exact path="/orders" component={Orders}/>
 
           </div>
           {/* <div className="container">

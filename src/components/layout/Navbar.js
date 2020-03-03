@@ -14,16 +14,11 @@ const Navbar = ({auth:{isAuthenticated, loading}, logout}) => {
                 </Link>
             </li>
             <li>
-                <Link to="/posts">
-                    <span className="hide-sm">Input Order</span>
-                </Link>
-            </li>
-            <li>
                 <Link to="/employees">
                     <span className="hide-sm">Employees</span>
                 </Link>
             </li>
-            <li><Link to="/profiles">Orders</Link></li>
+            <li><Link to="/orders">Orders</Link></li>
             <li><a href="#!" onClick={logout}>
                 <i className="fas fa-sign-out-alt"></i>{' '}
                 <span className="hide-sm">Logout</span></a>

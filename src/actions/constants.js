@@ -24,6 +24,7 @@ export const ADD_POST = 'ADD_POST';
 export const ADD_COMMENT = 'ADD_COMMENT'; 
 export const REMOVE_COMMENT = 'REMOVE_COMMENT'; 
 
+export const CREATE_ORDER = 'CREATE_ORDER';
 export const GET_ORDERS = 'GET_ORDERS';
 export const GET_USERS = 'GET_USERS';
 export const GET_EMPLOYEES = 'GET_EMPLOYEES';

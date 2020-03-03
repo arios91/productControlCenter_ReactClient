@@ -18,10 +18,7 @@ export const getEmployees = () => async dispatch => {
 
 export const removeEmployee = (empId) => async dispatch => {
     try {
-        console.log('in here');
-        console.log(empId);
         const res = await axios.delete(`${API_URL}/employees/${empId}`);
-        console.log(res);
 
         dispatch({
             type: REMOVE_EMPLOYEE,
@@ -38,11 +35,8 @@ export const createEmployee = (formData, edit = false) => async dispatch =>{
         const config = {
             headers:{'Content-type': 'application/json'}
         };
-        console.log(formData);
 
         const res = await axios.post(`${API_URL}/employees`, formData, config);
-
-        console.log(res);
 
         dispatch({
             type: CREATE_EMPLOYEE,

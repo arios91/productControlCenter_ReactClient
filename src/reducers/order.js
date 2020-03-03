@@ -1,4 +1,4 @@
-import {GET_ORDERS} from '../actions/constants'
+import {GET_ORDERS, CREATE_ORDER} from '../actions/constants'
 
 const initialState = {
     orders: [],
@@ -14,6 +14,12 @@ export default function(state = initialState, action){
             return{
                 ...state,
                 orders: payload,
+                loading: false
+            }
+        case CREATE_ORDER:
+            return{
+                ...state,
+                orders: [payload, ...state.orders],
                 loading: false
             }
         default:

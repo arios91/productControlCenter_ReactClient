@@ -26,7 +26,7 @@ const Employees = ({getEmployees, createEmployee, employee:{employees, loading}}
         createEmployee({userId, name, type, access, active});
     }
 
-    const onChange = e => {console.log(e.target.name);console.log(e.target.value);setFormData({...formData, [e.target.name]: e.target.value})}
+    const onChange = e => {setFormData({...formData, [e.target.name]: e.target.value})}
 
 
 
