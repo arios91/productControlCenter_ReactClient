@@ -5,6 +5,10 @@ import OrderItem from './OrderItem';
 import {getOrders, createOrder} from '../../actions/order'
 
 const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
+    useEffect(() => {
+        getOrders();
+    }, [getOrders]);
+
     const [formData, setFormData] = useState({
         orderNum: '',
         description: '',
@@ -38,10 +42,6 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
         orderTotal
     } = formData;
 
-    useEffect(() => {
-        getOrders();
-    }, [getOrders]);
-
     const onSubmit = async e => {
         e.preventDefault();
         let deliveryAddress = `${street}, ${city}, TX ${zip}`;
@@ -58,12 +58,27 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
             customerPhone,
             orderTotal
         });
+
+        setFormData({
+            orderNum: '',
+            description: '',
+            cardMessage: '',
+            specialInstructions: '',
+            status: '',
+            recipient: '',
+            street: '',
+            city: '',
+            state: 'TX',
+            zip: '',
+            deliveryPhone: '',
+            customer: '',
+            customerPhone: '',
+            orderTotal: 0
+        })
     }
 
 
     const onChange = e => {setFormData({...formData, [e.target.name]: e.target.value})}
-
-
     
     return loading ? <div>Loading</div> : 
     <div className="ordersMainContainer">
@@ -101,7 +116,7 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
         <hr/>
         <div className="ordersSubContainer">
             <h3>Orders</h3>
-            {orders.map(order => <OrderItem order={order}/>)}
+            {orders.map(order => <OrderItem key={order._id} order={order}/>)}
         </div>
     </div>
 }

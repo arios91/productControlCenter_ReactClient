@@ -28,7 +28,7 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar/>
-          <div className="container">
+          <div className="content">
             <Route exact path="/" component={Login}/>
             <PrivateRoute exact path="/register" component={Register}/>
             <PrivateRoute exact path="/dashboard" component={Dashboard}/>

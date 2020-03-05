@@ -61,7 +61,7 @@ const Employees = ({getEmployees, createEmployee, employee:{employees, loading}}
         <hr/>
         <div className="employeesSubContainer">
             <h3>Employees</h3>
-            {employees.map(emp => <EmployeeItem employee={emp}/>)}
+            {employees.map(emp => <EmployeeItem key={emp._id} employee={emp}/>)}
         </div>
     </div>
 }

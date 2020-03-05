@@ -1,15 +1,25 @@
-import React, {useEffect, Fragment} from 'react'
+import React, {useEffect} from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
-import {getOrders} from '../../actions/order';
+import {getOrders, createOrder} from '../../actions/order';
 import {getUsers} from '../../actions/user';
 import Spinner from '../layout/Spinner'
 import OrderContainer from './OrderContainer';
 
-const Dashboard = ({getOrders, order:{orders, loading}}) => {
+const Dashboard = ({getOrders, createOrder, order:{orders, loading}}) => {
     useEffect(() => {
+        console.log('useEffect1');
         getOrders();
     }, [getOrders]);
+    
+    useEffect(() => {
+        console.log('useEffect2');
+        const interval = setInterval(() => {
+            getOrders();
+        }, 1000 * 60 * 5 );
+        return () => clearInterval(interval);
+    }, []);
+
 
     
     return loading ? <Spinner/> :
@@ -22,6 +32,7 @@ const Dashboard = ({getOrders, order:{orders, loading}}) => {
 }
 
 Dashboard.propTypes = {
+    createOrder: PropTypes.func.isRequired,
     getOrders: PropTypes.func.isRequired,
     order: PropTypes.object.isRequired,
 }
@@ -33,4 +44,4 @@ const mapStateToProps = state => ({
     order: state.order
 })
 
-export default connect(mapStateToProps, {getOrders, getUsers})(Dashboard);
+export default connect(mapStateToProps, {getOrders, createOrder, getUsers})(Dashboard);
