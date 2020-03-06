@@ -8,8 +8,6 @@ const initialState = {
 
 export default function(state = initialState, action){
     const {type, payload} = action;
-    console.log(type);
-    console.log('hi from reducer');
 
     switch(type){
         case GET_ORDERS:

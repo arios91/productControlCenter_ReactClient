@@ -5,9 +5,7 @@ import {API_URL , GET_ORDERS, CREATE_ORDER, UPDATE_ORDER} from '../actions/const
 
 export const getOrders = () => async dispatch => {
     try {
-        console.log('Getting Orders');
         const res = await axios.get(`${API_URL}/orders`);
-        console.log(res.data);
 
         dispatch({
             type: GET_ORDERS,
@@ -21,14 +19,13 @@ export const getOrders = () => async dispatch => {
 
 export const createOrder = (formData, edit = false) => async dispatch => {
     try {
-        console.log('in here');
         const config = {
             headers:{'Content-type': 'application/json'}
         };
+        console.log(formData);
 
         const res = await axios.post(`${API_URL}/orders`, formData, config);
         console.log(res.data);
-
         if(!edit){
             dispatch({
                 type: CREATE_ORDER,

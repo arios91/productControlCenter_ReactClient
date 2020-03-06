@@ -2,18 +2,17 @@ import React, {useEffect} from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 import {getOrders, createOrder} from '../../actions/order';
-import {getUsers} from '../../actions/user';
 import Spinner from '../layout/Spinner'
+import {getEmployees} from '../../actions/employee'
 import OrderContainer from './OrderContainer';
 
-const Dashboard = ({getOrders, createOrder, order:{orders, loading}}) => {
+const Dashboard = ({getOrders, getEmployees, createOrder, order:{orders, loading}, employee:{employees}}) => {
     useEffect(() => {
-        console.log('useEffect1');
         getOrders();
-    }, [getOrders]);
+        getEmployees();
+    }, [getOrders, getEmployees]);
     
     useEffect(() => {
-        console.log('useEffect2');
         const interval = setInterval(() => {
             getOrders();
         }, 1000 * 60 * 5 );
@@ -24,24 +23,37 @@ const Dashboard = ({getOrders, createOrder, order:{orders, loading}}) => {
     
     return loading ? <Spinner/> :
     <div className="row">
-        <OrderContainer type="new" orders={orders.filter(order => order.status === 'new')}/>
-        <OrderContainer type="ready" orders={orders.filter(order => order.status === 'ready')}/>
-        <OrderContainer type="inDelivery" orders={orders.filter(order => order.status === 'inDelivery')}/>
-        <OrderContainer type="delivered" orders={orders.filter(order => order.status === 'delivered')}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type="new" orders={orders.filter(order => order.status === 'new')}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type="ready" orders={orders.filter(order => order.status === 'ready')}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type="inDelivery" orders={orders.filter(order => order.status === 'inDelivery')}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type="delivered" orders={orders.filter(order => order.status === 'delivered')}/>
+        <div className="col-12 font-weight-bold">
+            <span>Functional To-do:</span>
+            <ul>
+                <li>Order ready column by distance from flower shop</li>
+                <li>Bump orders up on the list after they've been in for a while</li>
+            </ul>
+            <span>Visual To-do:</span>
+            <ul>
+                <li>Column headers re-size depending on amount of orders in them, fix it</li>
+            </ul>
+        </div>
     </div>
 }
 
 Dashboard.propTypes = {
-    createOrder: PropTypes.func.isRequired,
+    getEmployees: PropTypes.func.isRequired,
     getOrders: PropTypes.func.isRequired,
     order: PropTypes.object.isRequired,
+    employee: PropTypes.object.isRequired
 }
 
 
 const mapStateToProps = state => ({
     auth: state.auth,
     profile: state.profile,
-    order: state.order
+    order: state.order,
+    employee: state.employee
 })
 
-export default connect(mapStateToProps, {getOrders, createOrder, getUsers})(Dashboard);
+export default connect(mapStateToProps, {getOrders, createOrder, getEmployees})(Dashboard);

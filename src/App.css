@@ -30,6 +30,10 @@ html, body{
     
 }
 
+.activeOrderContainerItem{
+    background: rgba(81, 229, 253, 0.3803921568627451)
+}
+
 @media (max-width: 767.98px) {
     #orderDetailsModal{
         max-width: 75%;

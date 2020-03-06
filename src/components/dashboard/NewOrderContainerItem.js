@@ -1,22 +1,19 @@
-import React, {useState, Fragment} from 'react'
+import React, {useState} from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import Moment from 'react-moment';
-import {connect} from 'react-redux'
-import {createOrder, getOrders} from '../../actions/order';
-import {Link, withRouter} from 'react-router-dom';
 
-const OrderContainerItem = ({order, createOrder}) => {
+const NewOrderContainerItem = ({order, setToReady}) => {
     const [displayModal, setShowModal] = useState(false);
 
     const showModal = () => {setShowModal(true)};
+
     const closeModal = () => {setShowModal(false)};
+
     const updateOrder = (e) => {
         e.preventDefault();
-        if(order.status === 'new'){
-            order.status = 'ready';
-            createOrder(order, true);
-        }
+        order.status = 'ready';
+        setToReady(order, true);
         closeModal();
     }
 
@@ -44,13 +41,11 @@ const OrderContainerItem = ({order, createOrder}) => {
                         {order.recipient}
                     </div>
                     <div className="col-7" onClick={showModal}>
-                        {order.status === 'new' ? 
-                        (details.map((detail, index) => 
+                        {details.map((detail, index) => 
                             <div key={`product_detaiL_${index}`}>
                                 {detail.includes("Product") ? <b>{detail.split(':', 2)[1]}</b> : <i>&nbsp;&nbsp;&nbsp;&nbsp;{detail}</i>}
-                            </div>)
-            )
-                        : order.deliveryAddress}
+                            </div>
+                        )}
                     </div>
                     
                 </div>
@@ -125,9 +120,9 @@ const OrderContainerItem = ({order, createOrder}) => {
     )
 }
 
-OrderContainerItem.propTypes = {
-    createOrder: PropTypes.func.isRequired,
+NewOrderContainerItem.propTypes = {
+    setToReady: PropTypes.func.isRequired,
     order: PropTypes.object.isRequired
 }
 
-export default connect(null, {createOrder})(withRouter(OrderContainerItem))
+export default NewOrderContainerItem
