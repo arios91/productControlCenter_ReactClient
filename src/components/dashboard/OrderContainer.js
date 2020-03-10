@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import NewOrderContainerItem from './NewOrderContainerItem';
 import ReadyOrderContainerItem from './ReadyOrderContainerItem';
 import DeliveryOrderContainerItem from './DeliveryOrderContainerItem';
+import DeliveredOrderContainerItem from './DeliveredOrderContainerItem';
 import { createOrder } from '../../actions/order';
 import { connect } from 'net';
 
@@ -11,6 +12,7 @@ const OrderContainer = ({type, orders, employees, updateOrder}) => {
     const NEW = 'new';
     const READY = 'ready';
     const IN_DELIVERY = 'inDelivery';
+    const DELIVERED = 'delivered';
     const [stagedForDelivery, setStagedForDelivery] = useState([]);
     const [selectedDriver, setSelectedDriver] = useState('');
 
@@ -19,6 +21,15 @@ const OrderContainer = ({type, orders, employees, updateOrder}) => {
             setStagedForDelivery(stagedForDelivery.filter(tmpOrder => tmpOrder._id !== order._id));
         }else{
             setStagedForDelivery([...stagedForDelivery, order]);
+        }
+    }
+
+    
+    const handleDriverSelect = e => {
+        if(e.target.value === SELECTED_DRIVER){
+            setSelectedDriver('');
+        }else{
+            setSelectedDriver(e.target.value);
         }
     }
 
@@ -37,14 +48,6 @@ const OrderContainer = ({type, orders, employees, updateOrder}) => {
         }
     }
 
-    const handleDriverSelect = e => {
-        if(e.target.value === SELECTED_DRIVER){
-            setSelectedDriver('');
-        }else{
-            setSelectedDriver(e.target.value);
-        }
-        console.log(selectedDriver);
-    }
     return (
         <div className='col-12 col-md-6 col-lg-3 orderContainer row'>
             <div className="col-12 text-center orderContainerHeader">
@@ -72,7 +75,9 @@ const OrderContainer = ({type, orders, employees, updateOrder}) => {
                     case READY:
                         return <ReadyOrderContainerItem key={order._id} order={order} stageForDelivery={stageForDelivery} />
                     case IN_DELIVERY:
-                        return <DeliveryOrderContainerItem key={order._id} order={order}/>
+                        return <DeliveryOrderContainerItem key={order._id} order={order} confirmDelivery={updateOrder}/>
+                    case DELIVERED:
+                        return <DeliveredOrderContainerItem key={order._id} order={order}/>
                     default:
                         return null
                 }

@@ -1,35 +1,28 @@
 import React, {useState, Fragment} from 'react'
 import PropTypes from 'prop-types'
-import Modal from 'react-modal'
 import Moment from 'react-moment';
-import {connect} from 'react-redux'
-import {createOrder, getOrders} from '../../actions/order';
-import {Link, withRouter} from 'react-router-dom';
 
-const ReadyOrderContainerItem = ({order, createOrder, stageForDelivery}) => {
+const ReadyOrderContainerItem = ({order, stageForDelivery}) => {
     const [staged, setStaged] = useState(false);
 
-    const updateOrder = (e) => {
+    const stage = e => {
         e.preventDefault();
-        if(order.status === 'new'){
-            order.status = 'ready';
-            createOrder(order, true);
-        }
-    }
-
-    const testClick = e => {
-        e.preventDefault();
-        console.log('click');
         setStaged(!staged);
-        console.log(staged);
         stageForDelivery(order, staged);
     }
+
     let details = order.description.split(',');
     let showAdditionalRow = order.cardMessage !== '' && order.specialInstructions !== '';
     return (
-        <div className={staged ? 'col-12 row orderContainerItem activeOrderContainerItem' : 'col-12 row orderContainerItem'} onClick={e => testClick(e)}>
+        <div className={staged ? 'col-12 row orderContainerItem activeOrderContainerItem' : 'col-12 row orderContainerItem'} onClick={e => stage(e)}>
             <div className="col-12 row">
                 <div className="col-12 row">
+                    <div className="col-4">
+                        Order ID:&nbsp;
+                    </div>
+                    <div className="col-8">
+                        {order.orderCount}
+                    </div>
                     <div className="col-4">
                         {order.recipient}
                     </div>
@@ -70,7 +63,7 @@ const ReadyOrderContainerItem = ({order, createOrder, stageForDelivery}) => {
                 :null}
                 <div className="col-12 row mt-1">
                     <div className="col-4">Delivery Date:&nbsp;</div>
-                    <div className="col-8"><Moment format="MM/DD/YYYY" date={order.deliveryDate}/></div>
+                    <div className="col-8"><Moment format="MM/DD/YY" date={order.deliveryDate}/></div>
                 </div>
             </div>
         </div>
@@ -78,9 +71,8 @@ const ReadyOrderContainerItem = ({order, createOrder, stageForDelivery}) => {
 }
 
 ReadyOrderContainerItem.propTypes = {
-    createOrder: PropTypes.func.isRequired,
     order: PropTypes.object.isRequired,
     stageForDelivery: PropTypes.func.isRequired,
 }
 
-export default connect(null, {createOrder})(withRouter(ReadyOrderContainerItem))
+export default ReadyOrderContainerItem;
