@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {Link, withRouter} from 'react-router-dom';
 import {setAlert} from './alert';
-import {API_URL , GET_ORDERS, CREATE_ORDER, UPDATE_ORDER} from '../actions/constants'
+import {API_URL , GET_ORDERS, CREATE_ORDER, UPDATE_ORDER, ORDER_ERROR} from '../actions/constants'
 
 export const getOrders = () => async dispatch => {
     try {
@@ -36,10 +36,19 @@ export const createOrder = (formData, edit = false) => async dispatch => {
                 type: UPDATE_ORDER,
                 payload: res.data
             })
+            return 'hello world';
         }
 
+        dispatch(setAlert('Success', 'primary'));
+
     } catch (error) {
-        console.log('error')
-        console.log(error);
+        const errors = error.response.data.errors;
+        if(errors){
+            errors.forEach(err => dispatch(setAlert(err.msg, 'danger')));
+        }
+        dispatch({
+            type: ORDER_ERROR,
+            payload: {msg: error.response.statusText, status: error.response.status}
+        })
     }
 }

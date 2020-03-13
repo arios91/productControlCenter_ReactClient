@@ -2,6 +2,8 @@ import React, {Fragment, useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux';
 import OrderItem from './OrderItem';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {getOrders, createOrder} from '../../actions/order'
 
 const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
@@ -18,12 +20,12 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
         recipient: '',
         street: '',
         city: '',
-        state: 'TX',
         zip: '',
         deliveryPhone: '',
         customer: '',
         customerPhone: '',
-        orderTotal: 0
+        orderTotal: 0,
+        tmpDeliveryDate: Date.now()
     });
 
     const {
@@ -34,12 +36,12 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
         recipient,
         street,
         city,
-        state,
         zip,
         deliveryPhone,
         customer,
         customerPhone,
-        orderTotal
+        orderTotal,
+        tmpDeliveryDate
     } = formData;
 
     const onSubmit = async e => {
@@ -56,7 +58,8 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
             deliveryPhone,
             customer,
             customerPhone,
-            orderTotal
+            orderTotal,
+            deliveryDate: tmpDeliveryDate
         });
 
         setFormData({
@@ -79,6 +82,10 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
 
 
     const onChange = e => {setFormData({...formData, [e.target.name]: e.target.value})}
+
+    const handleDateChange = date => {
+        setFormData({...formData, tmpDeliveryDate: date})
+    }
     
     return loading ? <div>Loading</div> : 
     <div className="ordersMainContainer">
@@ -98,15 +105,16 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
                 <div className="form-group">
                     <textarea placeholder="Description" className='w-100' name="description"  value={description} onChange={e => onChange(e)} required />
                 </div>
-                <div className="form-group">
-                    <textarea placeholder="Card Message" className='w-100' name="cardMessage"  value={cardMessage} onChange={e => onChange(e)} />
+                <div className="form-group row">
+                    <textarea placeholder="Card Message" className='col' name="cardMessage"  value={cardMessage} onChange={e => onChange(e)} />
+                    <textarea placeholder="Special Instructions" className='col' name="specialInstructions"  value={specialInstructions} onChange={e => onChange(e)} />
                 </div>
                 <div className="form-group">
-                    <textarea placeholder="Special Instructions" className='w-100' name="specialInstructions"  value={specialInstructions} onChange={e => onChange(e)} />
                 </div>
                 <div className='form-group row mx-0'>
                     <input type="text" className='col' placeholder='Customer' name='customer' value={customer} onChange={e => onChange(e)} />
                     <input type="tel" className='col' placeholder='Customer Phone' name='customerPhone' value={customerPhone} onChange={e => onChange(e)} />
+                    <DatePicker selected={tmpDeliveryDate} onChange={date => handleDateChange(date)}></DatePicker>
                     <input type="number" className='col' min="1" step="any" placeholder='Total' name='orderTotal' value={orderTotal} onChange={e => onChange(e)} required />
                 </div>
 

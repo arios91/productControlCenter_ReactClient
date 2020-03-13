@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
 import Orders from './components/orders/Orders';
 import Navbar from './components/layout/Navbar';
+import Alert from './components/layout/Alert';
 import Register from './components/auth/Register';
 import Dashboard from './components/dashboard/Dashboard';
 import Employees from './components/employees/Employees';
@@ -29,16 +30,13 @@ const App = () => {
         <Fragment>
           <Navbar/>
           <div className="content">
+            <Alert/>
             <Route exact path="/" component={Login}/>
             <PrivateRoute exact path="/register" component={Register}/>
             <PrivateRoute exact path="/dashboard" component={Dashboard}/>
             <PrivateRoute exact path="/employees" component={Employees}/>
             <PrivateRoute exact path="/orders" component={Orders}/>
-
           </div>
-          {/* <div className="container">
-            <Alert/>
-          </div> */}
         </Fragment>
       </Router>
     </Provider>

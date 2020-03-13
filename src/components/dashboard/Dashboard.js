@@ -32,8 +32,6 @@ const Dashboard = ({getOrders, getEmployees, createOrder, order:{orders, loading
             <ul>
                 <li>Order ready column by distance from flower shop</li>
                 <li>Bump orders up on the list after they've been in for a while</li>
-                <li>inDelivery Container</li>
-                <li>delivered container</li>
             </ul>
             <span>Visual To-do:</span>
             <ul>

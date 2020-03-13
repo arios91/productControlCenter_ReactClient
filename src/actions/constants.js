@@ -27,6 +27,7 @@ export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 
 export const CREATE_ORDER = 'CREATE_ORDER';
 export const UPDATE_ORDER = 'UPDATE_ORDER';
+export const ORDER_ERROR = 'ORDER_ERROR';
 export const GET_ORDERS = 'GET_ORDERS';
 export const GET_USERS = 'GET_USERS';
 export const GET_EMPLOYEES = 'GET_EMPLOYEES';
