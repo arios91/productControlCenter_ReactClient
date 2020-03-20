@@ -4,8 +4,6 @@ import NewOrderContainerItem from './NewOrderContainerItem';
 import ReadyOrderContainerItem from './ReadyOrderContainerItem';
 import DeliveryOrderContainerItem from './DeliveryOrderContainerItem';
 import DeliveredOrderContainerItem from './DeliveredOrderContainerItem';
-import { createOrder } from '../../actions/order';
-import { connect } from 'net';
 
 const OrderContainer = ({type, orders, employees, updateOrder}) => {
     const SELECTED_DRIVER = '-- Select Driver --';

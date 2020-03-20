@@ -31,8 +31,6 @@ const ReadyOrderContainerItem = ({order, stageForDelivery}) => {
                     </div>
                     <div className="col-12 row">
                         <div className="col-4">
-                            {order.orderNum}
-
                         </div>
                         <div className="col-8">
                             {details.map((detail, index) => 
@@ -64,6 +62,10 @@ const ReadyOrderContainerItem = ({order, stageForDelivery}) => {
                 <div className="col-12 row mt-1">
                     <div className="col-4">Delivery Date:&nbsp;</div>
                     <div className="col-8"><Moment format="MM/DD/YY" date={order.deliveryDate}/></div>
+                </div>
+                <div className="col-12 row mt-1">
+                    <div className="col-4">Distance:&nbsp;</div>
+                    <div className="col-8">{order.distanceFromShop} miles</div>
                 </div>
             </div>
         </div>

@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {getOrders, createOrder} from '../../actions/order'
 
-const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
+const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
     useEffect(() => {
         getOrders();
     }, [getOrders]);
@@ -124,7 +124,23 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
         <hr/>
         <div className="ordersSubContainer">
             <h3>Orders</h3>
-            {orders.map(order => <OrderItem key={order._id} order={order}/>)}
+            <div className="row">
+                <div className="col-12 row">
+                    <div className="col-10 row font-weight-bold">
+                        <div className="col">Order</div>
+                        <div className="col">ID</div>
+                        <div className="col">Recipient</div>
+                        <div className="col">Address</div>
+                        <div className="col">Status</div>
+                        <div className="col">Status Date</div>
+                        <div className="col">In Date</div>
+                        <div className="col">Total</div>
+                    </div>
+                    <div className="col-2">
+                    </div>
+                </div>
+                {orders.map(order => <OrderItem key={order._id} order={order} auth={auth} updateOrder={createOrder}/>)}
+            </div>
         </div>
     </div>
 }
@@ -132,11 +148,13 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}}) => {
 Orders.propTypes = {
     getOrders: PropTypes.func.isRequired,
     createOrder: PropTypes.func.isRequired,
-    order: PropTypes.object.isRequired
+    order: PropTypes.object.isRequired,
+    auth: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = state => ({
-    order: state.order
+    order: state.order,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps, {getOrders, createOrder})(Orders)

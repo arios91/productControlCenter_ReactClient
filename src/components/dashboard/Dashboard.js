@@ -23,15 +23,16 @@ const Dashboard = ({getOrders, getEmployees, createOrder, order:{orders, loading
     
     return loading ? <Spinner/> :
     <div className="row">
-        <OrderContainer employees={employees} updateOrder={createOrder} type="new" orders={orders.filter(order => order.status === 'new')}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type="ready" orders={orders.filter(order => order.status === 'ready')}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type="inDelivery" orders={orders.filter(order => order.status === 'inDelivery')}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type="delivered" orders={orders.filter(order => order.status === 'delivered')}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type="new" orders={orders.filter(order => order.status === 'new').sort((a,b) => (a.inDate > b.inDate) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type="ready" orders={orders.filter(order => order.status === 'ready').sort((a,b) => (a.distanceFromShop > b.distanceFromShop) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type="inDelivery" orders={orders.filter(order => order.status === 'inDelivery').sort((a,b) => (a.statusDate > b.statusDate) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type="delivered" orders={orders.filter(order => order.status === 'delivered').sort((a,b) => (a.statusDate > b.statusDate) ? 1 : -1)}/>
         <div className="col-12 font-weight-bold">
             <span>Functional To-do:</span>
             <ul>
-                <li>Order ready column by distance from flower shop</li>
+                <li><s>Order ready column by distance from flower shop</s></li>
                 <li>Bump orders up on the list after they've been in for a while</li>
+                <li>List only orders for the current day, maybe only in ready</li>
             </ul>
             <span>Visual To-do:</span>
             <ul>
