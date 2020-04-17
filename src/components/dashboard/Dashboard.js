@@ -5,6 +5,7 @@ import {getOrders, createOrder} from '../../actions/order';
 import Spinner from '../layout/Spinner'
 import {getEmployees} from '../../actions/employee'
 import OrderContainer from './OrderContainer';
+import {NEW, READY, IN_DELIVERY, NEEDS_CONFIRMATION, COMPLETE} from '../../actions/constants';
 
 const Dashboard = ({getOrders, getEmployees, createOrder, order:{orders, loading}, employee:{employees}}) => {
     useEffect(() => {
@@ -15,24 +16,29 @@ const Dashboard = ({getOrders, getEmployees, createOrder, order:{orders, loading
     useEffect(() => {
         const interval = setInterval(() => {
             getOrders();
-        }, 1000 * 60 * 5 );
+        }, 1000 * 60 * 1 );
         return () => clearInterval(interval);
     }, []);
+
+    const pendingConfirmation = orders.filter(order => order.status === NEEDS_CONFIRMATION).sort((a,b) => (a.statusDate < b.statusDate) ? 1 : -1);
+    const completeOrders = pendingConfirmation.concat(orders.filter(order => order.status === COMPLETE).sort((a,b) => (a.statusDate < b.statusDate) ? 1 : -1));
 
 
     
     return loading ? <Spinner/> :
     <div className="row">
-        <OrderContainer employees={employees} updateOrder={createOrder} type="new" orders={orders.filter(order => order.status === 'new').sort((a,b) => (a.inDate > b.inDate) ? 1 : -1)}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type="ready" orders={orders.filter(order => order.status === 'ready').sort((a,b) => (a.distanceFromShop > b.distanceFromShop) ? 1 : -1)}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type="inDelivery" orders={orders.filter(order => order.status === 'inDelivery').sort((a,b) => (a.statusDate > b.statusDate) ? 1 : -1)}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type="delivered" orders={orders.filter(order => order.status === 'delivered').sort((a,b) => (a.statusDate > b.statusDate) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type={NEW} orders={orders.filter(order => order.status === NEW).sort((a,b) => (a.inDate > b.inDate) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type={READY} orders={orders.filter(order => order.status === READY).sort((a,b) => (a.distanceFromShop > b.distanceFromShop) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type={IN_DELIVERY} orders={orders.filter(order => order.status === IN_DELIVERY).sort((a,b) => (a.statusDate > b.statusDate) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type={COMPLETE} orders={completeOrders}/>
         <div className="col-12 font-weight-bold">
             <span>Functional To-do:</span>
             <ul>
-                <li><s>Order ready column by distance from flower shop</s></li>
-                <li>Bump orders up on the list after they've been in for a while</li>
+                <li><s>App is complete</s></li>
+                <li>Update flower shop site to send data it's currently not sending</li>
                 <li>List only orders for the current day, maybe only in ready</li>
+                <li>List Orders in distance from shop, in ready column</li>
+                <li>Not in Release: Bump orders up on the list after they've been in for a while</li>
             </ul>
             <span>Visual To-do:</span>
             <ul>

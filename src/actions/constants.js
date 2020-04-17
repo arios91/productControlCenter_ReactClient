@@ -34,3 +34,10 @@ export const GET_EMPLOYEES = 'GET_EMPLOYEES';
 export const CREATE_EMPLOYEE = 'CREATE_EMPLOYEE';
 export const REMOVE_EMPLOYEE = 'REMOVE_EMPLOYEE';
 export const UPDATE_EMPLOYEE = 'UPDATE_EMPLOYEE';
+
+export const SELECTED_DRIVER = '-- Select Driver --';
+export const NEW = 'new';
+export const READY = 'ready';
+export const IN_DELIVERY = 'inDelivery';
+export const NEEDS_CONFIRMATION = 'needsConfirmation';
+export const COMPLETE = 'complete';

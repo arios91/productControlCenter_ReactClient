@@ -2,6 +2,7 @@ import React, {useState, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import Moment from 'react-moment';
+import { READY } from '../../actions/constants';
 
 const NewOrderContainerItem = ({order, setToReady}) => {
     const [displayModal, setShowModal] = useState(false);
@@ -12,7 +13,7 @@ const NewOrderContainerItem = ({order, setToReady}) => {
 
     const updateOrder = (e) => {
         e.preventDefault();
-        order.status = 'ready';
+        order.status = READY;
         setToReady(order, true);
         closeModal();
     }

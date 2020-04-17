@@ -4,13 +4,9 @@ import NewOrderContainerItem from './NewOrderContainerItem';
 import ReadyOrderContainerItem from './ReadyOrderContainerItem';
 import DeliveryOrderContainerItem from './DeliveryOrderContainerItem';
 import DeliveredOrderContainerItem from './DeliveredOrderContainerItem';
+import {SELECTED_DRIVER, NEW, READY, IN_DELIVERY, NEEDS_CONFIRMATION, COMPLETE} from '../../actions/constants';
 
 const OrderContainer = ({type, orders, employees, updateOrder}) => {
-    const SELECTED_DRIVER = '-- Select Driver --';
-    const NEW = 'new';
-    const READY = 'ready';
-    const IN_DELIVERY = 'inDelivery';
-    const DELIVERED = 'delivered';
     const [stagedForDelivery, setStagedForDelivery] = useState([]);
     const [selectedDriver, setSelectedDriver] = useState('');
 
@@ -30,15 +26,17 @@ const OrderContainer = ({type, orders, employees, updateOrder}) => {
             setSelectedDriver(e.target.value);
         }
     }
-
+    
     const submitDelivery = (e) => {
         e.preventDefault();
         if(selectedDriver === ''){
             alert('Select a driver');
         }else{
+            let employee = employees.filter(emp => emp.name === selectedDriver);
             stagedForDelivery.map(order => {
-                order.status = 'inDelivery';
+                order.status = IN_DELIVERY;
                 order.driver = selectedDriver;
+                order.driverId = employee[0]._id;
                 updateOrder(order, true);
             })
             setStagedForDelivery([]);
@@ -74,8 +72,9 @@ const OrderContainer = ({type, orders, employees, updateOrder}) => {
                         return <ReadyOrderContainerItem key={order._id} order={order} stageForDelivery={stageForDelivery} />
                     case IN_DELIVERY:
                         return <DeliveryOrderContainerItem key={order._id} order={order} confirmDelivery={updateOrder}/>
-                    case DELIVERED:
-                        return <DeliveredOrderContainerItem key={order._id} order={order}/>
+                    case COMPLETE:
+                    case NEEDS_CONFIRMATION:
+                        return <DeliveredOrderContainerItem key={order._id} order={order} confirmDelivery={updateOrder}/>
                     default:
                         return null
                 }

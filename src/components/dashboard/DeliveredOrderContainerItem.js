@@ -2,8 +2,9 @@ import React, {useState, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import Moment from 'react-moment';
+import { NEEDS_CONFIRMATION, COMPLETE } from '../../actions/constants';
 
-const DeliveredOrderContainerItem = ({order}) => {
+const DeliveredOrderContainerItem = ({order, confirmDelivery}) => {
     const [displayModal, setShowModal] = useState(false);
     let details = order.description.split(',');
 
@@ -25,9 +26,15 @@ const DeliveredOrderContainerItem = ({order}) => {
         }
     }
 
+    const updateOrder = e =>{
+        e.preventDefault();
+        order.status = COMPLETE;
+        confirmDelivery(order, true);
+    }
+
     return (
         <Fragment>
-            <div className='col-12 row orderContainerItem' onClick={e => showModal(e)}>
+            <div className={order.status === NEEDS_CONFIRMATION ? 'col-12 row orderContainerItem needsConfirmation':'col-12 row orderContainerItem'} onClick={e => showModal(e)}>
                 <div className="col-4">
                     Order ID:&nbsp;
                 </div>
@@ -51,6 +58,9 @@ const DeliveredOrderContainerItem = ({order}) => {
                 </div>
                 <div className="col-8">
                     <Moment format="MM/DD/YY, h:mm a" date={order.statusDate}/>
+                </div>
+                <div className="col-12">
+                    {order.status}
                 </div>
             </div>
             <Modal
@@ -90,7 +100,12 @@ const DeliveredOrderContainerItem = ({order}) => {
                         <div className="col-6 orderDetailsLabel">Special Instructions:&nbsp;&nbsp;&nbsp;&nbsp;</div>
                         <div className="col-6">{order.specialInstructions}</div>
                         <div className="col-12 row mt-3 detailsActionButtonsContainer text-center">
-                            <button className='btn col-12 btn-secondary detailsActionButton' onClick={closeModal}>Back</button>
+                            <div className="col-12 col-lg-6 p-2">
+                                <button className='btn btn-block btn-secondary detailsActionButton' onClick={closeModal}>Back</button>
+                            </div>
+                            <div className="col-12 col-lg-6 p-2">
+                                <button className='btn btn-block btn-primary detailsActionButton' onClick={updateOrder} disabled={order.status === COMPLETE}>Delivery Confirmed</button>
+                            </div>
                         </div>
                     </div>
             </Modal>
@@ -100,7 +115,8 @@ const DeliveredOrderContainerItem = ({order}) => {
 }
 
 DeliveredOrderContainerItem.propTypes = {
-    order: PropTypes.object.isRequired
+    order: PropTypes.object.isRequired,
+    confirmDelivery: PropTypes.func.isRequired,
 }
 
 export default DeliveredOrderContainerItem;

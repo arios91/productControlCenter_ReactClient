@@ -2,6 +2,8 @@ import React, {useState, Fragment} from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import Moment from 'react-moment';
+import { NEEDS_CONFIRMATION, COMPLETE } from '../../actions/constants';
+
 
 const DeliveryOrderContainerItem = ({order, confirmDelivery}) => {
     const [displayModal, setShowModal] = useState(false);
@@ -14,7 +16,11 @@ const DeliveryOrderContainerItem = ({order, confirmDelivery}) => {
 
     const updateOrder = e => {
         e.preventDefault();
-        order.status = 'delivered';
+        if(order.bloomOrder){
+            order.status= NEEDS_CONFIRMATION;
+        }else{
+            order.status = COMPLETE;
+        }
         confirmDelivery(order, true);
         closeModal();
     }
