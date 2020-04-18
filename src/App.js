@@ -29,7 +29,7 @@ const App = () => {
       <Router>
         <Fragment>
           <Navbar/>
-          <div className="content">
+          <div className="myContainer">
             <Alert/>
             <Route exact path="/" component={Login}/>
             <PrivateRoute exact path="/register" component={Register}/>

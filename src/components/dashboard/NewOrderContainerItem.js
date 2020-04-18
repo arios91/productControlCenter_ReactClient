@@ -46,12 +46,18 @@ const NewOrderContainerItem = ({order, setToReady}) => {
                             {order.orderCount}
                         </div>
                         <div className="col-5">
+                            Recipient:&nbsp;
+                        </div>
+                        <div className="col-7">
                             {order.recipient}
+                        </div>
+                        <div className="col-5">
+
                         </div>
                         <div className="col-7">
                             {details.map((detail, index) => 
                                 <div key={`product_detaiL_${index}`}>
-                                    {detail.includes("Product") ? <b>{detail.split(':', 2)[1]}</b> : <i>&nbsp;&nbsp;&nbsp;&nbsp;{detail}</i>}
+                                    {detail.includes("Product") ? <b>{detail.split(':', 2)[1]}</b> : <i>{detail}</i>}
                                 </div>
                             )}
                         </div>

@@ -1,18 +1,39 @@
-html, body{
+html, body, #root, .dashboard{
     height: 100%;
+}
+html, body, .navbar{
+    background: #34414a;
+}
+
+.navbar{
+    padding: 0 !important;
+    color: #fcd4d6;
+}
+.myContainer{
+    height: 95%;
 }
 
 .orderContainer{
     border: 1px solid black;
-    border-radius: 5px;
-    min-height: 5rem;
+    border-radius: 25px;
+    display: inline-block;
+    background-color: #fff;
 }
-.orderContainerHeader{
 
+.orderContainerHeader{
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+    font-weight: bold;
+    color: #34414a;
+    font-size: 2rem;
 }
 
 .orderContainerItem{
-    border-top: 1px solid black;
+    border: 1px solid black;
+    background-color: #fcd4d6;
+    border-radius: 20px;
+    padding: 5px !important;
+
 }
 
 .needsConfirmation{
