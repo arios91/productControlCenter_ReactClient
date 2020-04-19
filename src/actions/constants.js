@@ -41,3 +41,6 @@ export const READY = 'ready';
 export const IN_DELIVERY = 'inDelivery';
 export const NEEDS_CONFIRMATION = 'needsConfirmation';
 export const COMPLETE = 'complete';
+export const TYPES = ['admin', 'driver', 'secretary'];
+export const TYPE_ADMIN = 'admin';
+export const TYPE_DRIVER = 'driver';

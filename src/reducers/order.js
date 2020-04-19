@@ -7,10 +7,7 @@ const initialState = {
 }
 
 export default function(state = initialState, action){
-    console.log('hello from order reducer');
     const {type, payload} = action;
-    console.log(type);
-    console.log(payload);
 
     switch(type){
         case GET_ORDERS:

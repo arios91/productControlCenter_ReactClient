@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import Moment from 'react-moment';
 import { NEEDS_CONFIRMATION, COMPLETE } from '../../actions/constants';
+import PerfectScrollbar from 'react-perfect-scrollbar'
 
 
 const DeliveryOrderContainerItem = ({order, confirmDelivery}) => {

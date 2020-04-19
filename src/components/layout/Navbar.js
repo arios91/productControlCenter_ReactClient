@@ -7,23 +7,25 @@ import {logout} from '../../actions/auth';
 const Navbar = ({auth:{isAuthenticated, loading}, logout}) => {
     const authLinks = (
         <Fragment>
+            <span>test</span>
+
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
-                <ul className="navbar-nav">
-                <li className="nav-item active">
-                    <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">Features</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link" href="#">Pricing</a>
-                </li>
-                <li className="nav-item">
-                    <a className="nav-link disabled" href="#">Disabled</a>
-                </li>
+                <ul className="navbar-nav ml-auto">
+                    <li className="nav-item active">
+                        <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Features</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li className="nav-item">
+                        <a className="nav-link disabled" href="#">Disabled</a>
+                    </li>
                 </ul>
             </div>
         </Fragment>
@@ -50,18 +52,27 @@ const Navbar = ({auth:{isAuthenticated, loading}, logout}) => {
 
     return (
         <nav className="navbar navbar-expand-lg navbar-dark">
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <div className="d-flex flex-grow-1">
+                <span className="w-100 d-lg-none d-block"></span>
+                <Link to="/dashboard" className="navbar-brand">Petalos y Arte</Link>
+                <div className="w-100 text-right">
+                    <button className="navbar-toggler" tpye="button" data-toggle="collapse" data-target="#navbarNavAltMarkup">
+                        <span className="navbar-toggler-icon"></span>
+                    </button>
+                </div>
+            </div>
+            {/* <button className="navbar-toggler ml-auto" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="#navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-                <div className="navbar-nav">
+            </button> */}
+            <div className="collapse navbar-collapse flex-grow-1 text-right" id="navbarNavAltMarkup">
+                <div className="navbar-nav ml-auto">
                     <Link to="/dashboard" className="nav-item nav-link">Dashboard</Link>
                     <Link to="/employees" className="nav-item nav-link">Employees</Link>
                     <Link to="/orders" className="nav-item nav-link">Orders</Link>
                     <a href="/" className="nav-item nav-link" onClick={logout}>Logout</a>
                 </div>
             </div>
-            </nav>
+        </nav>
     )
         // <nav className="navbar navbar-expand-lg">
             {/* <Link to="/" className="headerTitle">

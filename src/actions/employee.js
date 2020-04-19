@@ -1,5 +1,6 @@
 import axios from 'axios';
-import {API_URL, GET_EMPLOYEES, CREATE_EMPLOYEE, REMOVE_EMPLOYEE} from './constants';
+import {setAlert} from './alert';
+import {API_URL, GET_EMPLOYEES, CREATE_EMPLOYEE, REMOVE_EMPLOYEE, UPDATE_EMPLOYEE} from './constants';
 
 
 
@@ -29,21 +30,31 @@ export const removeEmployee = (empId) => async dispatch => {
     }
 }
 
+
 //create employee
 export const createEmployee = (formData, edit = false) => async dispatch =>{
     try {
+        console.log('in create employee');
+        console.log(edit);
         const config = {
             headers:{'Content-type': 'application/json'}
         };
+        console.log(formData);
 
         const res = await axios.post(`${API_URL}/employees`, formData, config);
-
-        dispatch({
-            type: CREATE_EMPLOYEE,
-            payload: res.data
-        })
-
-        // dispatch(setAlert(edit ? 'Employee Udpated' : 'Employee Created'));
+        console.log(res.data);
+        if(!edit){
+            dispatch({
+                type: CREATE_EMPLOYEE,
+                payload: res.data
+            })
+        }else{
+            dispatch({
+                type: UPDATE_EMPLOYEE,
+                payload: res.data
+            })
+        }
+        dispatch(setAlert('Success', 'primary'));
 
     } catch (err) {
         // const errors = err.response.data.errors;

@@ -24,7 +24,13 @@ const ReadyOrderContainerItem = ({order, stageForDelivery}) => {
                         {order.orderCount}
                     </div>
                     <div className="col-4">
+                        Recipient:&nbsp;
+                    </div>
+                    <div className="col-8">
                         {order.recipient}
+                    </div>
+                    <div className="col-4">
+                        Address:&nbsp;
                     </div>
                     <div className="col-8">
                         {order.deliveryAddress}
@@ -35,7 +41,7 @@ const ReadyOrderContainerItem = ({order, stageForDelivery}) => {
                         <div className="col-8">
                             {details.map((detail, index) => 
                                 <div key={`product_detaiL_${index}`}>
-                                    {detail.includes("Product") ? <b>{detail.split(':', 2)[1]}</b> : <i>&nbsp;&nbsp;&nbsp;&nbsp;{detail}</i>}
+                                    {detail.includes("Product") ? <b>{detail.split(':', 2)[1]}</b> : <i>{detail}</i>}
                                 </div>
                             )}
 

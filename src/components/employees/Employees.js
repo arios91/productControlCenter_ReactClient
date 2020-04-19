@@ -23,7 +23,7 @@ const Employees = ({getEmployees, createEmployee, employee:{employees, loading}}
 
     const onSubmit = async e => {
         e.preventDefault();
-        createEmployee({userId, name, type, access, active});
+        createEmployee({userId, name, type, access, active}, false);
     }
 
     const onChange = e => {setFormData({...formData, [e.target.name]: e.target.value})}

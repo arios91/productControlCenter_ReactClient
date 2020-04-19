@@ -19,6 +19,8 @@ export const getOrders = () => async dispatch => {
 
 export const createOrder = (formData, edit = false) => async dispatch => {
     try {
+        console.log('in create order');
+        console.log(edit);
         const config = {
             headers:{'Content-type': 'application/json'}
         };

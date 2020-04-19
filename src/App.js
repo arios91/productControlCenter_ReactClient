@@ -9,6 +9,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import Employees from './components/employees/Employees';
 import Login from './components/auth/Login';
 import './App.css';
+import 'react-perfect-scrollbar/dist/css/styles.css';
 
 //Redux
 import { Provider } from 'react-redux';

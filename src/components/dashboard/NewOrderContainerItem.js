@@ -4,6 +4,7 @@ import Modal from 'react-modal'
 import Moment from 'react-moment';
 import { READY } from '../../actions/constants';
 
+
 const NewOrderContainerItem = ({order, setToReady}) => {
     const [displayModal, setShowModal] = useState(false);
 
@@ -89,6 +90,7 @@ const NewOrderContainerItem = ({order, setToReady}) => {
                     ${order.orderTotal}
                 </div>
             </div>
+
             <Modal
                 id="orderDetailsModal"
                 isOpen={displayModal} 
