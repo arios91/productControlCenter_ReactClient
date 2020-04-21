@@ -4,23 +4,17 @@ import {connect} from 'react-redux';
 import {removeEmployee, createEmployee} from '../../actions/employee';
 import Switch from "react-switch";
 import Modal from 'react-modal'
-import { TYPES, TYPE_ADMIN, TYPE_DRIVER } from '../../actions/constants';
-import { ifStatement } from '@babel/types';
+import {TYPE_ADMIN, TYPE_DRIVER } from '../../actions/constants';
 
 const EmployeeItem = ({employee, removeEmployee, createEmployee}) => {
     const userTypesArr = employee.type.split(',');
-    console.log(userTypesArr);
     const [edit, setEdit] = useState(false);
     const [tmpActive, setTmpActive] = useState(employee.active);
     const [isAdmin, setIsAdmin] = useState(userTypesArr.includes(TYPE_ADMIN));
     const [isDriver, setIsDriver] = useState(userTypesArr.includes(TYPE_DRIVER));
     const [displayModal, setShowModal] = useState(false);
 
-    console.log(`${employee.name} isAdmin: ${isAdmin}`);
-    console.log(`${employee.name} isDriver: ${isDriver}`);
     
-    
-    let tmpUserTypesArr = employee.type.split(',');
 
     const showModal = () => {setShowModal(true)};
     const closeModal = () => {setShowModal(false)};
@@ -62,9 +56,6 @@ const EmployeeItem = ({employee, removeEmployee, createEmployee}) => {
         employee.active = tmpActive;
         employee.type = typeString;
 
-        //update employee here;
-        console.log('sending employee');
-        console.log(employee);
         createEmployee(employee, true);
         setEdit(false);
     }
@@ -93,7 +84,7 @@ const EmployeeItem = ({employee, removeEmployee, createEmployee}) => {
 
     return (
         <Fragment>
-            <div className="row my-4">
+            <div className="row my-3">
                 <div className="col-6 col-lg-10 row">
                     <div className="col-12 col-lg-4">
                         <b>Name: </b>
@@ -126,7 +117,7 @@ const EmployeeItem = ({employee, removeEmployee, createEmployee}) => {
                         </Fragment>}
                     </div>
                 </div>
-                <div className="col-6  col-lg-2 row">
+                <div className="col-6 col-lg-2 row">
                     {edit ? 
                     <Fragment>
                         <button type="button" className='btn btn-secondary btn-block' onClick={e => cancelEdit()}>Cancel</button>

@@ -5,6 +5,8 @@ import OrderItem from './OrderItem';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {getOrders, createOrder} from '../../actions/order'
+import PerfectScrollbar from 'react-perfect-scrollbar'
+import Switch from "react-switch";
 
 const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
     useEffect(() => {
@@ -25,6 +27,7 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
         customer: '',
         customerPhone: '',
         orderTotal: 0,
+        bloomOrder: false,
         tmpDeliveryDate: Date.now()
     });
 
@@ -41,6 +44,7 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
         customer,
         customerPhone,
         orderTotal,
+        bloomOrder,
         tmpDeliveryDate
     } = formData;
 
@@ -59,6 +63,7 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
             customer,
             customerPhone,
             orderTotal,
+            bloomOrder,
             deliveryDate: tmpDeliveryDate
         });
 
@@ -76,10 +81,14 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
             deliveryPhone: '',
             customer: '',
             customerPhone: '',
+            bloomOrder: false,
             orderTotal: 0
         })
     }
 
+    const typeToggle = (a,b,type) => {
+        setFormData({...formData, bloomOrder: !bloomOrder});
+    }
 
     const onChange = e => {setFormData({...formData, [e.target.name]: e.target.value})}
 
@@ -88,12 +97,12 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
     }
     
     return loading ? <div>Loading</div> : 
-    <div className="ordersMainContainer">
-        <div className="createOrderForm">
+    <div className="ordersMainContainer row">
+        <div className="createOrderForm col-12 col-lg-4 orderContainerNoHeight text-center p-3">
             <h3>Input Order</h3>
             <form className="form" onSubmit={e => onSubmit(e)}>
                 <div className="form-group row mx-0">
-                    <input type="text" className='col' placeholder="Order Number" name="orderNum"  value={orderNum} onChange={e => onChange(e)} required/>
+                    <input type="text" className='col' placeholder="Bloom Order Number" name="orderNum"  value={orderNum} onChange={e => onChange(e)}/>
                     <input type="text" className='col' placeholder='Recipient' name='recipient' value={recipient} onChange={e => onChange(e)} required/>
                     <input type="tel" className='col' placeholder='Recipient Phone' name='deliveryPhone' required value={deliveryPhone} onChange={e => onChange(e)} />
                 </div>
@@ -109,7 +118,9 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
                     <textarea placeholder="Card Message" className='col' name="cardMessage"  value={cardMessage} onChange={e => onChange(e)} />
                     <textarea placeholder="Special Instructions" className='col' name="specialInstructions"  value={specialInstructions} onChange={e => onChange(e)} />
                 </div>
-                <div className="form-group">
+                <div className="form-group row">
+                    <label htmlFor="bloomOrder">Bloom Order&nbsp;</label>
+                    <Switch id="bloomOrder" onChange={typeToggle} checked={bloomOrder}/>
                 </div>
                 <div className='form-group row mx-0'>
                     <input type="text" className='col' placeholder='Customer' name='customer' value={customer} onChange={e => onChange(e)} />
@@ -122,25 +133,30 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
             </form>
         </div>
         <hr/>
-        <div className="ordersSubContainer">
-            <h3>Orders</h3>
-            <div className="row">
-                <div className="col-12 row">
-                    <div className="col-10 row font-weight-bold">
-                        <div className="col">Order</div>
-                        <div className="col">ID</div>
-                        <div className="col">Recipient</div>
-                        <div className="col">Address</div>
-                        <div className="col">Status</div>
-                        <div className="col">Status Date</div>
-                        <div className="col">In Date</div>
-                        <div className="col">Total</div>
-                    </div>
-                    <div className="col-2">
-                    </div>
+        <div className="ordersSubContainer col-12 col-lg-8 orderContainer p-3">
+            <PerfectScrollbar>
+                <div className="text-center">
+                    <h3>Orders</h3>
                 </div>
-                {orders.map(order => <OrderItem key={order._id} order={order} auth={auth} updateOrder={createOrder}/>)}
-            </div>
+                <div className="row">
+                    <div className="col-12 row">
+                        <div className="col-10 row font-weight-bold">
+                            <div className="col">Order</div>
+                            <div className="col">ID</div>
+                            <div className="col">Recipient</div>
+                            <div className="col">Address</div>
+                            <div className="col">Status</div>
+                            <div className="col">Status Date</div>
+                            <div className="col">In Date</div>
+                            <div className="col">Total</div>
+                        </div>
+                        <div className="col-2">
+                        </div>
+                    </div>
+                    {orders.sort((a,b) => (a.statusDate < b.statusDate) ? 1 : -1).map(order => <OrderItem key={order._id} order={order} auth={auth} updateOrder={createOrder}/>)}
+                </div>
+
+            </PerfectScrollbar>
         </div>
     </div>
 }
