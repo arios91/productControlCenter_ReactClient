@@ -84,7 +84,7 @@ const EmployeeItem = ({employee, removeEmployee, createEmployee}) => {
 
     return (
         <Fragment>
-            <div className="row my-3">
+            <div className="row my-3 employeeItem">
                 <div className="col-6 col-lg-10 row">
                     <div className="col-12 col-lg-4">
                         <b>Name: </b>

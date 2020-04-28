@@ -2,11 +2,11 @@ html, body, #root, .dashboard, .ordersMainContainer{
     height: 100%;
 }
 html, body, .navbar{
-    background: #34414a;
+    background: #181c24;
 }
 
 .navbar{
-    padding: 0 !important;
+    padding: 0rem 6rem !important;
     color: #fcd4d6;
 }
 .navbar-brand{
@@ -29,36 +29,60 @@ html, body, .navbar{
 }
 
 .orderContainer{
-    border: 1px solid black;
+    /* border: 1px solid black; */
     border-radius: 25px;
     display: inline-block;
     height: 100%;
-    background: linear-gradient(0deg, #9E9E9E, #ffffff);
+    padding: 0rem .5rem !important;
+    margin: 0rem 2rem !important;
+    margin-bottom: 2rem !important;
+    overflow: hidden;
+    background-color: #323c4e;
+}
+
+.ordersSubContainer{
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    color: #eee;
+}
+.scrollbar-container{
+    border-radius: 15px;
+}
+
+.marginContainer{
+    margin-left: 6rem !important;
+    margin-right: 6rem !important;
 }
 
 .orderContainerNoHeight{
     border: 1px solid black;
     border-radius: 25px;
     display: inline-block;
-    background: linear-gradient(0deg, #9E9E9E, #ffffff);
+    background: #323c4e;
 }
 
 .orderContainerHeader{
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
-    font-weight: bold;
-    color: #34414a;
+    font-weight: 500;
+    color: #eee;
     font-size: 2rem;
 }
 
+
 .orderContainerItem{
-    border: 1px solid black;
-    background-color: #a1a1a1;
+    margin-bottom: .25rem !important;
+    background: #b1bccd;
     border-radius: 20px;
     padding: 5px !important;
-
+    color: #171c24;
+    font-weight: 500;
 }
 
+.orderDetailsItem{
+    background: #b1bccd;
+    margin-bottom: 1rem !important;
+}
 .needsConfirmation{
     background: #dc3545;
     font-weight: bold;
@@ -85,21 +109,32 @@ html, body, .navbar{
 
 .employeesMainContainer{
     height: 100%;
+    color: #eee;
 }
 
-.employeesItem{
-
+.employeesContainer{
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
 }
 
-@media (max-width: 767.98px) {
+.employeeItem{
+    background: #b1bccd;
+    border-radius: 15px;
+    padding: 1rem;
+    color: #171c24;
+}
+
+/* @media (max-width: 767.98px) { */
+@media (max-width: 992px) {
     #orderDetailsModal{
         max-width: 75%;
         font-size: .75rem;
     }
-}
-@media (max-width: 767.98px) {
-    #orderDetailsModal{
-        max-width: 100%;
-        font-size: .75rem;
+    .marginContainer{
+        margin-left: 1rem !important;
+        margin-right: 1rem !important;
+    }
+    .orderContainerNoHeight{
+        margin-bottom: 2rem !important;
     }
 }

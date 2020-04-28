@@ -65,8 +65,8 @@ const Employees = ({getEmployees, createEmployee, employee:{employees, loading}}
 
 
     return loading ? <Spinner/> : 
-    <div className="employeesMainContainer row">
-        <div className="col-12 col-lg-3 text-center orderContainerNoHeight p-3">
+    <div className="employeesMainContainer marginContainer row row-cols-2 justify-content-between">
+        <div className="col-12 col-lg-3 text-center orderContainerNoHeight">
             <h3>Register Employee</h3>
             <form className="form" onSubmit={e => onSubmit(e)}>
                 <div className="form-group">
@@ -84,7 +84,7 @@ const Employees = ({getEmployees, createEmployee, employee:{employees, loading}}
                 <input type="submit" className="btn btn-primary" value="Register" />
             </form>
         </div>
-        <div className="col-12 col-lg-9 text-lg-center text-md-center text-sm-left orderContainer p-3">
+        <div className="employeesContainer col-12 col-lg-8 text-center orderContainerNoHeight">
             <h3>Employees</h3>
             {employees.map(emp => <EmployeeItem key={emp._id} employee={emp}/>)}
         </div>

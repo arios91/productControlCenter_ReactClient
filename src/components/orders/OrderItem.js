@@ -51,7 +51,7 @@ const OrderItem = ({order, auth:{user,loading}, updateOrder}) => {
     let showAdditionalRow = order.cardMessage !== '' && order.specialInstructions !== '';
     return loading ? <Spinner/> :
         <Fragment>
-            <div className="col-12 row">
+            <div className="col-12 row orderContainerItem">
                 <div className="col-10 row">
                     <div className="col">{order.orderCount}</div>
                     <div className="col">{order.orderNum}</div>

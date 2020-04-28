@@ -25,26 +25,28 @@ const Login = ({login, isAuthenticated}) => {
     }
 
     return (
-        <Fragment>
-            <h1 className="large text-primary">Sign In</h1>
-            <p className="lead"><i className="fas fa-user"></i> Sign Into Your Account</p>
-            <form className="form" onSubmit={e => onSubmit(e)}>
-                <div className="form-group">
-                    <input type="email" placeholder="Email Address" name="email" required value={email} onChange={e => onChange(e)} />
-                </div>
-                <div className="form-group">
-                    <input
-                        type="password"
-                        placeholder="Password"
-                        name="password"
-                        minLength="6"
-                        required
-                        value={password} onChange={e => onChange(e)} 
-                    />
-                </div>
-                <input type="submit" className="btn btn-primary" value="Sign In" />
-            </form>
-        </Fragment>
+        <div calssName="container row">
+            <div className="col-12 text-center">
+                <h1 className="large text-primary">Sign In</h1>
+                <p className="lead"><i className="fas fa-user"></i> Sign Into Your Account</p>
+                <form className="form" onSubmit={e => onSubmit(e)}>
+                    <div className="form-group">
+                        <input type="email" placeholder="Email Address" name="email" required value={email} onChange={e => onChange(e)} />
+                    </div>
+                    <div className="form-group">
+                        <input
+                            type="password"
+                            placeholder="Password"
+                            name="password"
+                            minLength="6"
+                            required
+                            value={password} onChange={e => onChange(e)} 
+                        />
+                    </div>
+                    <input type="submit" className="btn btn-primary" value="Sign In" />
+                </form>
+            </div>
+        </div>
     )
 }
 

@@ -97,8 +97,8 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
     }
     
     return loading ? <div>Loading</div> : 
-    <div className="ordersMainContainer row">
-        <div className="createOrderForm col-12 col-lg-4 orderContainerNoHeight text-center p-3">
+    <div className="ordersMainContainer marginContainer row row-cols-2 justify-content-between">
+        <div className="ordersSubContainer createOrderForm col-12 col-lg-4 orderContainer text-center">
             <h3>Input Order</h3>
             <form className="form" onSubmit={e => onSubmit(e)}>
                 <div className="form-group row mx-0">
@@ -132,8 +132,7 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
                 <input type="submit" className="btn btn-primary w-100" value="Submit Order" />
             </form>
         </div>
-        <hr/>
-        <div className="ordersSubContainer col-12 col-lg-8 orderContainer p-3">
+        <div className="ordersSubContainer col-12 col-lg-7 orderContainer">
             <PerfectScrollbar>
                 <div className="text-center">
                     <h3>Orders</h3>

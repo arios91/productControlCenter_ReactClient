@@ -26,25 +26,11 @@ const Dashboard = ({getOrders, getEmployees, createOrder, order:{orders, loading
 
     
     return loading ? <Spinner/> :
-    <div className="row dashboard">
-        <OrderContainer employees={employees} updateOrder={createOrder} type={NEW} orders={orders.filter(order => order.status === NEW).sort((a,b) => (a.inDate > b.inDate) ? 1 : -1)}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type={READY} orders={orders.filter(order => order.status === READY).sort((a,b) => (a.distanceFromShop > b.distanceFromShop) ? 1 : -1)}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type={IN_DELIVERY} orders={orders.filter(order => order.status === IN_DELIVERY).sort((a,b) => (a.statusDate > b.statusDate) ? 1 : -1)}/>
-        <OrderContainer employees={employees} updateOrder={createOrder} type={COMPLETE} orders={completeOrders}/>
-        {/* <div className="col-12 font-weight-bold">
-            <span>Functional To-do:</span>
-            <ul>
-                <li><s>App is complete</s></li>
-                <li>Update flower shop site to send data it's currently not sending</li>
-                <li>List only orders for the current day, maybe only in ready</li>
-                <li>List Orders in distance from shop, in ready column</li>
-                <li>Not in Release: Bump orders up on the list after they've been in for a while</li>
-            </ul>
-            <span>Visual To-do:</span>
-            <ul>
-                <li>Column headers re-size depending on amount of orders in them, fix it</li>
-            </ul>
-        </div> */}
+    <div className="row row-cols-1 row-cols-md-1 row-cols-lg-5 dashboard justify-content-center">
+        <OrderContainer employees={employees} updateOrder={createOrder} type={NEW} header="New" orders={orders.filter(order => order.status === NEW).sort((a,b) => (a.inDate > b.inDate) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type={READY} header="Ready" orders={orders.filter(order => order.status === READY).sort((a,b) => (a.distanceFromShop > b.distanceFromShop) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type={IN_DELIVERY} header="In Delivery" orders={orders.filter(order => order.status === IN_DELIVERY).sort((a,b) => (a.statusDate > b.statusDate) ? 1 : -1)}/>
+        <OrderContainer employees={employees} updateOrder={createOrder} type={COMPLETE} header="Complete" orders={completeOrders}/>
     </div>
 }
 
