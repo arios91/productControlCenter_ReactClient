@@ -35,27 +35,48 @@ const NewOrderContainerItem = ({order, setToReady}) => {
 
     let details = order.description.split(',');
     let showAdditionalRow = order.cardMessage !== '' && order.specialInstructions !== '';
+
+    const formatMoney = () => {
+        let str = order.orderTotal.toString();
+
+        let dollars = '0';
+        let cents = '.00';
+        let index = str.indexOf('.');
+        if(index < 0){
+            dollars = str;
+        }else{
+            dollars = str.substr(0, index);
+            cents = str.substring(index, str.length);
+            if(cents.length == 2){
+                cents = `${cents}0`;
+            }else if(cents.length == 1){
+                cents = `${cents}00`;
+            }
+        }
+
+        str = `$${dollars}${cents}`;
+        return str;
+    }
     return (
         <Fragment>
             <div className='col-12 row orderContainerItem' onClick={showModal}>
                 <div className="col-10 row">
                     <div className="col-12 row">
-                        <div className="col-5">
-                            Order Id:&nbsp;
+                        <div className="col-5 orderItemLabel">
+                            ID:&nbsp;
                         </div>
-                        <div className="col-7">
+                        <div className="col-7 orderItemText">
                             {order.orderCount}
                         </div>
-                        <div className="col-5">
+                        <div className="col-5 orderItemLabel">
                             Recipient:&nbsp;
                         </div>
-                        <div className="col-7">
+                        <div className="col-7 orderItemText">
                             {order.recipient}
                         </div>
                         <div className="col-5">
-
                         </div>
-                        <div className="col-7">
+                        <div className="col-7 orderItemDescription">
                             {details.map((detail, index) => 
                                 <div key={`product_detaiL_${index}`}>
                                     {detail.includes("Product") ? <b>{detail.split(':', 2)[1]}</b> : <i>{detail}</i>}
@@ -67,27 +88,27 @@ const NewOrderContainerItem = ({order, setToReady}) => {
                         <div className="col-12 row">
                             {order.cardMessage !== '' ?
                                 <div className="col-12 row mt-1">
-                                    <div className="col-5">Card:&nbsp;</div>
-                                    <div className="col-7">{order.cardMessage}</div>
+                                    <div className="col-5 orderItemLabel">Card:&nbsp;</div>
+                                    <div className="col-7 orderItemText">{order.cardMessage}</div>
                                 </div>
                             :null}
                             {order.specialInstructions !== '' ?
                                 <div className="col-12 row mt-1">
-                                    <div className="col-5">Instructions:&nbsp;</div>
-                                    <div className="col-7">{order.specialInstructions}</div>
+                                    <div className="col-5 orderItemLabel">Instructions:&nbsp;</div>
+                                    <div className="col-7 orderItemText">{order.specialInstructions}</div>
                                 </div>
                             :null}
                         </div>
                     :null}
                     <div className="col-12 row mt-1">
-                        <div className="col-5">Arrival Date:&nbsp;</div>
-                        <div className="col-7"><Moment format="MM/DD/YY, h:mm a" date={order.inDate}/></div>
-                        <div className="col-5">Delivery Date:&nbsp;</div>
-                        <div className="col-7"><Moment format="MM/DD/YY" date={order.deliveryDate}/></div>
+                        <div className="col-5 orderItemLabel">Arrival Date:&nbsp;</div>
+                        <div className="col-7 orderItemText"><Moment format="MM/DD/YY, h:mm a" date={order.inDate}/></div>
+                        <div className="col-5 orderItemLabel">Delivery Date:&nbsp;</div>
+                        <div className="col-7 orderItemText"><Moment format="MM/DD/YY" date={order.deliveryDate}/></div>
                     </div>
                 </div>
-                <div className="col-2 text-center font-italic align-self-center">
-                    ${order.orderTotal}
+                <div className="col-2 text-center font-italic align-self-center orderAmount">
+                    {formatMoney()}
                 </div>
             </div>
 
@@ -121,7 +142,7 @@ const NewOrderContainerItem = ({order, setToReady}) => {
                             }
                         </div>
                         <div className="col-6 orderDetailsLabel">Total Price:&nbsp;&nbsp;&nbsp;&nbsp;</div>
-                        <div className="col-6">${order.orderTotal}</div>
+                        <div className="col-6 orderAmount">{formatMoney()}</div>
                         <hr/>
                         <div className="col-6 orderDetailsLabel">Card Message:&nbsp;&nbsp;&nbsp;&nbsp;</div>
                         <div className="col-6">{order.cardMessage}</div>

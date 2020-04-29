@@ -17,28 +17,28 @@ const ReadyOrderContainerItem = ({order, stageForDelivery}) => {
         <div className={staged ? 'col-12 row orderContainerItem activeOrderContainerItem' : 'col-12 row orderContainerItem'} onClick={e => stage(e)}>
             <div className="col-12 row">
                 <div className="col-12 row">
-                    <div className="col-4">
-                        Order ID:&nbsp;
+                    <div className="col-4 orderItemLabel">
+                        ID:&nbsp;
                     </div>
-                    <div className="col-8">
+                    <div className="col-8 orderItemText">
                         {order.orderCount}
                     </div>
-                    <div className="col-4">
+                    <div className="col-4 orderItemLabel">
                         Recipient:&nbsp;
                     </div>
-                    <div className="col-8">
+                    <div className="col-8 orderItemText">
                         {order.recipient}
                     </div>
-                    <div className="col-4">
+                    <div className="col-4 orderItemLabel">
                         Address:&nbsp;
                     </div>
-                    <div className="col-8">
+                    <div className="col-8 orderItemText">
                         {order.deliveryAddress}
                     </div>
                     <div className="col-12 row">
                         <div className="col-4">
                         </div>
-                        <div className="col-8">
+                        <div className="col-8 orderItemDescription">
                             {details.map((detail, index) => 
                                 <div key={`product_detaiL_${index}`}>
                                     {detail.includes("Product") ? <b>{detail.split(':', 2)[1]}</b> : <i>{detail}</i>}
@@ -53,25 +53,25 @@ const ReadyOrderContainerItem = ({order, stageForDelivery}) => {
                     <div className="col-12 row">
                         {order.cardMessage !== '' ?
                             <div className="col-12 row mt-1">
-                                <div className="col-4">Card:&nbsp;</div>
-                                <div className="col-8">{order.cardMessage}</div>
+                                <div className="col-4 orderItemLabel">Card:&nbsp;</div>
+                                <div className="col-8 orderItemText">{order.cardMessage}</div>
                             </div>
                         :null}
                         {order.specialInstructions !== '' ?
                             <div className="col-12 row mt-1">
-                                <div className="col-4">Instructions:&nbsp;</div>
-                                <div className="col-8">{order.specialInstructions}</div>
+                                <div className="col-4 orderItemLabel">Instructions:&nbsp;</div>
+                                <div className="col-8 orderItemText">{order.specialInstructions}</div>
                             </div>
                         :null}
                     </div>
                 :null}
                 <div className="col-12 row mt-1">
-                    <div className="col-4">Delivery Date:&nbsp;</div>
-                    <div className="col-8"><Moment format="MM/DD/YY" date={order.deliveryDate}/></div>
+                    <div className="col-4 orderItemLabel">Delivery Date:&nbsp;</div>
+                    <div className="col-8 orderItemText"><Moment format="MM/DD/YY" date={order.deliveryDate}/></div>
                 </div>
                 <div className="col-12 row mt-1">
-                    <div className="col-4">Distance:&nbsp;</div>
-                    <div className="col-8">{order.distanceFromShop} miles</div>
+                    <div className="col-4 orderItemLabel">Distance:&nbsp;</div>
+                    <div className="col-8 orderItemText">{order.distanceFromShop} miles</div>
                 </div>
             </div>
         </div>

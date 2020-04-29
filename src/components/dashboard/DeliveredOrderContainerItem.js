@@ -36,31 +36,37 @@ const DeliveredOrderContainerItem = ({order, confirmDelivery}) => {
     return (
         <Fragment>
             <div className={order.status === NEEDS_CONFIRMATION ? 'col-12 row orderContainerItem needsConfirmation':'col-12 row orderContainerItem'} onClick={e => showModal(e)}>
-                <div className="col-4">
-                    Order ID:&nbsp;
+                <div className="col-4 orderItemLabel">
+                    ID:&nbsp;
                 </div>
-                <div className="col-8">
+                <div className="col-8 orderItemText">
                     {order.orderCount}
                 </div>
-                <div className="col-4">
+                <div className="col-4 orderItemLabel">
+                    Recipient:&nbsp;
+                </div>
+                <div className="col-8 orderItemTextl">
                     {order.recipient}
                 </div>
-                <div className="col-8">
+                <div className="col-4 orderItemLabel">
+                    Address:&nbsp;
+                </div>
+                <div className="col-8 orderItemText">
                     {order.deliveryAddress}
                 </div>
-                <div className="col-4">
+                <div className="col-4 orderItemLabel">
                     Driver:&nbsp;
                 </div>
-                <div className="col-8">
+                <div className="col-8 orderItemText">
                     {order.driver}
                 </div>
-                <div className="col-4">
+                <div className="col-4 orderItemLabel">
                     Delivered:&nbsp;
                 </div>
-                <div className="col-8">
+                <div className="col-8 orderItemText">
                     <Moment format="MM/DD/YY, h:mm a" date={order.statusDate}/>
                 </div>
-                <div className="col-12">
+                <div className="col-12 text-center orderItemDescription">
                     {order.status}
                 </div>
             </div>

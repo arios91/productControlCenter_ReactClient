@@ -152,7 +152,7 @@ const Orders = ({getOrders, createOrder, order:{orders, loading}, auth}) => {
                         <div className="col-2">
                         </div>
                     </div>
-                    {orders.sort((a,b) => (a.statusDate < b.statusDate) ? 1 : -1).map(order => <OrderItem key={order._id} order={order} auth={auth} updateOrder={createOrder}/>)}
+                    {orders.sort((a,b) => (a.orderCount < b.orderCount) ? 1 : -1).map(order => <OrderItem key={order._id} order={order} auth={auth} updateOrder={createOrder}/>)}
                 </div>
 
             </PerfectScrollbar>

@@ -1,4 +1,5 @@
-export const API_URL = 'https://petalos-y-arte-control-center.herokuapp.com';
+// export const API_URL = 'https://petalos-y-arte-control-center.herokuapp.com';
+export const API_URL = process.env.API_URL;
 // export const API_URL = 'http://192.168.50.229:5000';
 export const SET_ALERT = 'SET_ALERT';
 export const REMOVE_ALERT = 'REMOVE_ALERT';

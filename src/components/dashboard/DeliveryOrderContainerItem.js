@@ -43,28 +43,34 @@ const DeliveryOrderContainerItem = ({order, confirmDelivery}) => {
     return (
         <Fragment>
             <div className='col-12 row orderContainerItem' onClick={e => showModal(e)}>
-                <div className="col-4">
-                    Order ID:&nbsp;
+                <div className="col-4 orderItemLabel">
+                    ID:&nbsp;
                 </div>
-                <div className="col-8">
+                <div className="col-8 orderItemText">
                     {order.orderCount}
                 </div>
-                <div className="col-4">
+                <div className="col-4 orderItemLabel">
+                    Recipient:&nbsp;
+                </div>
+                <div className="col-8 orderItemLabel">
                     {order.recipient}
                 </div>
-                <div className="col-8">
+                <div className="col-4 orderItemLabel">
+                    Address:&nbsp;
+                </div>
+                <div className="col-8 orderItemText">
                     {order.deliveryAddress}
                 </div>
-                <div className="col-4">
+                <div className="col-4 orderItemLabel">
                     Driver:&nbsp;
                 </div>
-                <div className="col-8">
+                <div className="col-8 orderItemText">
                     {order.driver}
                 </div>
-                <div className="col-4">
+                <div className="col-4 orderItemLabel">
                     Delivery Date:&nbsp;
                 </div>
-                <div className="col-8">
+                <div className="col-8 orderItemText">
                     <Moment format="MM/DD/YY" date={order.deliveryDate}/>
                 </div>
             </div>
